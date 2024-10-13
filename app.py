@@ -3,6 +3,7 @@ import pickle
 import string
 from nltk.corpus import stopwords
 import nltk
+from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
@@ -45,9 +46,11 @@ if st.button('Predict'):
     # 1. preprocess
     transformed_sms = transform_text(input_sms)
     # 2. vectorize
-    vector_input = tfidf.transform([transformed_sms])
+    vectorizer = TfidfVectorizer()
+    X = vectorizer.fit_transform([transformed_sms])
+    #vector_input = TfidfVectorizer.transform([transformed_sms])
     # 3. predict
-    result = model.predict(vector_input)[0]
+    result = model.predict(X)[0]
     # 4. Display
     if result == 1:
         st.header("Spam")
