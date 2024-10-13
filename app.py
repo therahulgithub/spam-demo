@@ -4,6 +4,7 @@ import string
 from nltk.corpus import stopwords
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
 from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
@@ -42,15 +43,19 @@ st.title("Email/SMS Spam Classifier")
 input_sms = st.text_area("Enter the message")
 
 if st.button('Predict'):
+    transformed_sms = transform_text(input_sms)
+    X = tfidf.transform([transformed_sms])
+    result = model.predict(X)[0]
 
     # 1. preprocess
-    transformed_sms = transform_text(input_sms)
+    
     # 2. vectorize
-    vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform([transformed_sms])
-    #vector_input = TfidfVectorizer.transform([transformed_sms])
+    # vectorizer = TfidfVectorizer()
+    # X = vectorizer.fit_transform([transformed_sms])
+     
+    # vector_input = TfidfVectorizer.transform([transformed_sms])
     # 3. predict
-    result = model.predict(X)[0]
+    
     # 4. Display
     if result == 1:
         st.header("Spam")
