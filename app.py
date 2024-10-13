@@ -46,17 +46,7 @@ if st.button('Predict'):
     transformed_sms = transform_text(input_sms)
     X = tfidf.transform([transformed_sms])
     result = model.predict(X)[0]
-
-    # 1. preprocess
     
-    # 2. vectorize
-    # vectorizer = TfidfVectorizer()
-    # X = vectorizer.fit_transform([transformed_sms])
-     
-    # vector_input = TfidfVectorizer.transform([transformed_sms])
-    # 3. predict
-    
-    # 4. Display
     if result == 1:
         st.header("Spam")
     else:
