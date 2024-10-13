@@ -7,6 +7,7 @@ from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
 
+nltk.download('all')
 
 def transform_text(text):
     text = text.lower()
